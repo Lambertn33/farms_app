@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +14,20 @@ use App\Http\Controllers\Auth\AuthController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+// Authentication Routes
 Route::controller(AuthController::class)->prefix('auth')->middleware('api')->group(function () {
     Route::post('/login', 'login');
     Route::post('/logout', 'logout');
 });
+
+//Administrator Routes
+Route::middleware('check.role:' . User::ADMIN. '')->group(function () {
+});
+
+//Site Manager Routes
+Route::middleware('check.role:' . User::SITE_MANAGER. '')->group(function () {
+});
+//Farmer Routes
+Route::middleware('check.role:' . User::FARMER. '')->group(function () {
+});
+
