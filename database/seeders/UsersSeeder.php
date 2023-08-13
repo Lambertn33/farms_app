@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UsersSeeder extends Seeder
@@ -23,7 +24,7 @@ class UsersSeeder extends Seeder
                 'id' => Str::uuid()->toString(),
                 'names' => 'System admin',
                 'email' => 'admin@gmail.com',
-                'password' => 'admin12345',
+                'password' => Hash::make('admin12345'),
                 'role' => User::ADMIN,
                 'has_confirmed_password' => true,
                 'phone_no' => 250788111111,
