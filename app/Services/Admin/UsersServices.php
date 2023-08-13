@@ -2,6 +2,7 @@
 
 namespace App\Services\Admin;
 
+use App\Jobs\UserCreated;
 use App\Models\Farmer;
 use App\Models\SiteManager;
 use App\Models\User;
@@ -49,6 +50,7 @@ class UsersServices
             Farmer::insert($newFarmer);
         }
 
+        UserCreated::dispatch($newUser, $defaultPassword);
         return response()->json(['message' => 'new user created successfully'], 201);
     }
 }
