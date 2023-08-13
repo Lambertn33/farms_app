@@ -27,6 +27,7 @@ Route::controller(AuthController::class)
 //Administrator Routes
 Route::middleware('check.role:' . User::ADMIN . '')->group(function () {
     Route::controller(UsersController::class)->prefix('users')->group(function () {
+        Route::get('/', 'index');
         Route::post('/', 'store');
     });
 });

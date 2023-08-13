@@ -9,6 +9,10 @@ use App\Services\Admin\UsersServices;
 
 class UsersController extends Controller
 {
+    public function index(Request $request)
+    {
+        return (new UsersServices)->getUsers($request);
+    }
     public function store(Request $request)
     {
         $request->validate([
@@ -16,7 +20,7 @@ class UsersController extends Controller
             'names' => 'required',
             'phone_no' => 'required|unique:users|max:12|min:12',
             'email' => 'required|email|unique:users',
-             //farmers fields
+            //farmers fields
             'DOB' => 'sometimes|required',
             'gender' => 'sometimes|required',
             'marital_status' => 'sometimes|required',

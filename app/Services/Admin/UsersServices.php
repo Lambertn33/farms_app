@@ -11,6 +11,17 @@ use Illuminate\Support\Str;
 
 class UsersServices
 {
+    public function getUsers($request)
+    {
+        $usersQuery = User::query();
+        $role = $request->query('role');
+        $usersQuery->when($role, function ($query) use ($role) {
+            return $query->where('role', $role);
+        });
+        $users = $usersQuery->get();
+        return response()->json(['users' => $users]);
+    }
+
     public function createUser($userObject)
     {
         $currentDateTime = now();
