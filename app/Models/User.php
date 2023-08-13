@@ -14,6 +14,14 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const ROLES = ['ADMIN', 'SITE_MANAGER', 'FARMER'];
+
+    const ADMIN = self::ROLES[0];
+
+    const SITE_MANAGER = self::ROLES[1];
+
+    const FARMER = self::ROLES[2];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,7 +31,8 @@ class User extends Authenticatable
         'id',
         'names',
         'email',
-        'role_id',
+        'role',
+        'has_confirmed_password',
         'phone_no',
         'password',
     ];
@@ -45,20 +54,9 @@ class User extends Authenticatable
      */
     protected $casts = [
         'id' => 'string',
-        'role_id' => 'string',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    /**
-     * Get the role that owns the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'role_id', 'id');
-    }
 
     /**
      * Get the farmer associated with the User
