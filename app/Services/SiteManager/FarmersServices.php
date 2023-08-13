@@ -1,27 +1,15 @@
 <?php
 
-namespace App\Services\Admin;
+namespace App\Services\SiteManager;
 
 use App\Jobs\UserCreated;
 use App\Models\Farmer;
-use App\Models\SiteManager;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
-class UsersServices
+class FarmersServices
 {
-    public function getUsers($request)
-    {
-        $usersQuery = User::query();
-        $role = $request->query('role');
-        $usersQuery->when($role, function ($query) use ($role) {
-            return $query->where('role', $role);
-        });
-        $users = $usersQuery->get();
-        return response()->json(['users' => $users]);
-    }
-
     public function createUser($userObject)
     {
         $currentDateTime = now();
@@ -37,7 +25,7 @@ class UsersServices
             'created_at' => now(),
             'updated_at' => now()
         ];
-        $newSiteManager = [
+        $newFarmer = [
             'id' => Str::uuid()->toString(),
             'user_id' => $newUser['id'],
             'created_at' => now(),
@@ -45,10 +33,7 @@ class UsersServices
         ];
 
         User::insert($newUser);
-
-        if ($userObject->role === User::SITE_MANAGER) {
-            SiteManager::insert($newSiteManager);
-        }
+        Farmer::insert($newFarmer);
 
         UserCreated::dispatch($newUser, $defaultPassword);
         return response()->json(['message' => 'new user created successfully'], 201);

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\SiteManager\FarmersController;
 use App\Models\User;
 
 /*
@@ -34,6 +35,9 @@ Route::middleware('check.role:' . User::ADMIN . '')->group(function () {
 
 //Site Manager Routes
 Route::middleware('check.role:' . User::SITE_MANAGER . '')->group(function () {
+    Route::controller(FarmersController::class)->prefix('farmers')->group(function() {
+        Route::post('/', 'store');
+    });
 });
 //Farmer Routes
 Route::middleware('check.role:' . User::FARMER . '')->group(function () {

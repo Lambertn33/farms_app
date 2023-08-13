@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\SiteManager;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Services\Admin\UsersServices;
+use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class FarmersController extends Controller
 {
-    public function index(Request $request)
-    {
-        return (new UsersServices)->getUsers($request);
-    }
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $request->validate([
-            'role' => 'required',
+            //users field
             'names' => 'required',
             'phone_no' => 'required|unique:users|max:12|min:12',
             'email' => 'required|email|unique:users',
+            'DOB' => 'required',
+            'gender' => 'required',
+            'marital_status' => 'required',
+            'family_members' => 'required'
         ]);
+
         return (new UsersServices)->createUser($request);
     }
 }
