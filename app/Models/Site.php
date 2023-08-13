@@ -11,7 +11,12 @@ class Site extends Model
 {
     use HasFactory;
 
-    const LAND_TYPES = ['TYPE_1', 'TYPE_2'];
+    const LAND_TYPES = ['SANDY SOIL', 'SILT SOIL', 'CLAY SOIL', 'LOAMY SOIL'];
+
+    const SANDY_SOIL = self::LAND_TYPES[0];
+    const SILT_SOIL = self::LAND_TYPES[1];
+    const CLAY_SOIL = self::LAND_TYPES[2];
+    const LOAMY_SOIL = self::LAND_TYPES[3];
 
     protected $fillable = [
         'id', 'manager_id', 'land_type', 'size'
