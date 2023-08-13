@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SitesController;
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
@@ -31,11 +32,16 @@ Route::middleware('check.role:' . User::ADMIN . '')->group(function () {
         Route::get('/', 'index');
         Route::post('/', 'store');
     });
+    Route::controller(SitesController::class)->prefix('sites')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/create', 'create');
+        Route::post('/', 'store');
+    });
 });
 
 //Site Manager Routes
 Route::middleware('check.role:' . User::SITE_MANAGER . '')->group(function () {
-    Route::controller(FarmersController::class)->prefix('farmers')->group(function() {
+    Route::controller(FarmersController::class)->prefix('farmers')->group(function () {
         Route::post('/', 'store');
     });
 });

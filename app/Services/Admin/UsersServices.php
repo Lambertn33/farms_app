@@ -3,7 +3,6 @@
 namespace App\Services\Admin;
 
 use App\Jobs\UserCreated;
-use App\Models\Farmer;
 use App\Models\SiteManager;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
