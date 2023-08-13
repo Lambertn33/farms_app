@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Models\User;
@@ -15,19 +16,24 @@ use App\Models\User;
 |
 */
 // Authentication Routes
-Route::controller(AuthController::class)->prefix('auth')->middleware('api')->group(function () {
-    Route::post('/login', 'login');
-    Route::post('/logout', 'logout');
-});
+Route::controller(AuthController::class)
+    ->prefix('auth')
+    ->middleware('api')
+    ->group(function () {
+        Route::post('/login', 'login');
+        Route::post('/logout', 'logout');
+    });
 
 //Administrator Routes
-Route::middleware('check.role:' . User::ADMIN. '')->group(function () {
+Route::middleware('check.role:' . User::ADMIN . '')->group(function () {
+    Route::controller(UsersController::class)->prefix('users')->group(function () {
+        Route::post('/', 'store');
+    });
 });
 
 //Site Manager Routes
-Route::middleware('check.role:' . User::SITE_MANAGER. '')->group(function () {
+Route::middleware('check.role:' . User::SITE_MANAGER . '')->group(function () {
 });
 //Farmer Routes
-Route::middleware('check.role:' . User::FARMER. '')->group(function () {
+Route::middleware('check.role:' . User::FARMER . '')->group(function () {
 });
-
