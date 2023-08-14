@@ -11,8 +11,18 @@ class Farm extends Model
 {
     use HasFactory;
 
+    const STATUS = [
+        'PENDING', 'REJECTED', 'ACCEPTED'
+    ];
+
+    const PENDING = self::STATUS[0];
+
+    const REJECTED = self::STATUS[1];
+
+    const ACCEPTED = self::STATUS[2];
+
     protected $fillable = [
-        'id', 'site_id', 'farmer_id', 'size'
+        'id', 'name', 'site_id', 'farmer_id', 'size', 'status'
     ];
 
     protected $casts = [

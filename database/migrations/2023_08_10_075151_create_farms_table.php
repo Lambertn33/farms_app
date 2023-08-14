@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Farm;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,6 +16,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('site_id');
             $table->uuid('farmer_id');
+            $table->string('name');
+            $table->enum('status', Farm::STATUS)->default(Farm::PENDING);
             $table->bigInteger('size');
             $table->timestamps();
         });
