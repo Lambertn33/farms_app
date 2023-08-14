@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\Admin\FarmersController as AdminFarmersController;
 
 use App\Http\Controllers\SiteManager\FarmersController as ManagerFarmersController;
+use App\Http\Controllers\SiteManager\SitesController as ManagerSitesController;
 
 use App\Http\Controllers\Farmer\FarmsController as FarmerFarmsController;
 
@@ -55,6 +56,10 @@ Route::middleware('check.role:' . User::ADMIN . '')->prefix('admin')->group(func
 Route::middleware('check.role:' . User::SITE_MANAGER . '')->prefix('manager')->group(function () {
     Route::controller(ManagerFarmersController::class)->prefix('farmers')->group(function () {
         Route::post('/', 'store');
+    });
+    Route::controller(ManagerSitesController::class)->prefix('sites')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{siteId}/farms', 'show');
     });
 });
 //Farmer Routes
