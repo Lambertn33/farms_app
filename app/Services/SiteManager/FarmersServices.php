@@ -28,6 +28,10 @@ class FarmersServices
         $newFarmer = [
             'id' => Str::uuid()->toString(),
             'user_id' => $newUser['id'],
+            'DOB' => $userObject->DOB,
+            'gender' => $userObject->gender,
+            'marital_status' => $userObject->marital_status,
+            'family_members' => $userObject->family_members,
             'created_at' => now(),
             'updated_at' => now()
         ];
@@ -36,6 +40,6 @@ class FarmersServices
         Farmer::insert($newFarmer);
 
         UserCreated::dispatch($newUser, $defaultPassword);
-        return response()->json(['message' => 'new user created successfully'], 201);
+        return response()->json(['message' => 'new farmer created successfully'], 201);
     }
 }

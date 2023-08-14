@@ -4,6 +4,7 @@ namespace App\Http\Controllers\SiteManager;
 
 use App\Http\Controllers\Controller;
 use App\Services\Admin\UsersServices;
+use App\Services\SiteManager\FarmersServices;
 use Illuminate\Http\Request;
 
 class FarmersController extends Controller
@@ -21,6 +22,6 @@ class FarmersController extends Controller
             'family_members' => 'required'
         ]);
 
-        return (new UsersServices)->createUser($request);
+        return (new FarmersServices)->createUser($request);
     }
 }
