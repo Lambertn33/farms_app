@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\FarmersController as AdminFarmersController;
 
 use App\Http\Controllers\SiteManager\FarmersController as ManagerFarmersController;
 use App\Http\Controllers\SiteManager\SitesController as ManagerSitesController;
+use App\Http\Controllers\SiteManager\FarmsController as ManagerFarmsController;
 
 use App\Http\Controllers\Farmer\FarmsController as FarmerFarmsController;
 
@@ -57,9 +58,19 @@ Route::middleware('check.role:' . User::SITE_MANAGER . '')->prefix('manager')->g
     Route::controller(ManagerFarmersController::class)->prefix('farmers')->group(function () {
         Route::post('/', 'store');
     });
-    Route::controller(ManagerSitesController::class)->prefix('sites')->group(function () {
-        Route::get('/', 'index');
-        Route::get('/{siteId}/farms', 'show');
+    Route::prefix('sites')->group(function () {
+        Route::controller(ManagerSitesController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::get('/{siteId}/farms', 'show');
+        });
+        Route::controller(ManagerFarmsController::class)->group(function () {
+            Route::prefix('{siteId}/farms')->group(function () {
+                Route::prefix('{farmId}')->group(function () {
+                    Route::get('/', 'show');
+                    Route::put('/', 'update');
+                });
+            });
+        });
     });
 });
 //Farmer Routes

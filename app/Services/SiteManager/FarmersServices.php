@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class FarmersServices
 {
-    public function createUser($userObject)
+    public function createFarmer($userObject)
     {
         $currentDateTime = now();
         $defaultPassword = $currentDateTime->format('YmdHis');

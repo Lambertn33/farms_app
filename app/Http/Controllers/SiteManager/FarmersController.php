@@ -22,6 +22,6 @@ class FarmersController extends Controller
             'family_members' => 'required'
         ]);
 
-        return (new FarmersServices)->createUser($request);
+        return (new FarmersServices)->createFarmer($request);
     }
 }
