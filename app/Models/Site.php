@@ -11,7 +11,7 @@ class Site extends Model
 {
     use HasFactory;
 
-    const LAND_TYPES = ['SANDT', 'SILT', 'CLAY', 'LOAMY'];
+    const LAND_TYPES = ['SANDY', 'SILT', 'CLAY', 'LOAMY'];
 
     const SANDY_SOIL = self::LAND_TYPES[0];
     const SILT_SOIL = self::LAND_TYPES[1];
