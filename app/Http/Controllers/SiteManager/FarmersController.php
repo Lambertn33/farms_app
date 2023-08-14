@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class FarmersController extends Controller
 {
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             //users field
