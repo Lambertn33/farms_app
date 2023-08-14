@@ -19,7 +19,7 @@ class Site extends Model
     const LOAMY_SOIL = self::LAND_TYPES[3];
 
     protected $fillable = [
-        'id', 'manager_id', 'land_type', 'size'
+        'id', 'manager_id', 'land_type', 'size', 'name'
     ];
 
     protected $casts = [

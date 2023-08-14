@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('sites', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('name')->unique();
             $table->uuid('manager_id');
             $table->integer('size');
             $table->enum('land_type', Site::LAND_TYPES);

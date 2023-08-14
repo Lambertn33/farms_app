@@ -22,6 +22,7 @@ class SitesServices
     {
         $newSite = [
             'id' => Str::uuid()->toString(),
+            'name' => $siteObject->name,
             'manager_id' => $siteObject->manager_id,
             'land_type' => $siteObject->land_type,
             'size' => $siteObject->size,

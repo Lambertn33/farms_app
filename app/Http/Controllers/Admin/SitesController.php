@@ -21,7 +21,8 @@ class SitesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'manager_id' => 'required',
+            'manager_id' => 'required|exists:site_managers,id',
+            'name' => 'required|unique:sites',
             'size' => 'required',
             'land_type' => 'required',
         ]);
