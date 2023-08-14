@@ -22,7 +22,7 @@ class Farm extends Model
     const ACCEPTED = self::STATUS[2];
 
     protected $fillable = [
-        'id', 'name', 'site_id', 'farmer_id', 'size', 'status'
+        'id', 'name', 'farm_number', 'site_id', 'farmer_id', 'size', 'status'
     ];
 
     protected $casts = [

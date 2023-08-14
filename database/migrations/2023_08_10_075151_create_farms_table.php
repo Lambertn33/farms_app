@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('site_id');
             $table->uuid('farmer_id');
             $table->string('name');
+            $table->string('farm_number');
             $table->enum('status', Farm::STATUS)->default(Farm::PENDING);
             $table->bigInteger('size');
             $table->timestamps();
