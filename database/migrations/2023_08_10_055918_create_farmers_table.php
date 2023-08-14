@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('gender', Farmer::GENDER);
             $table->enum('marital_status', Farmer::MARITAL_STATUS);
             $table->integer('family_members');
+            $table->enum('eduction_level', Farmer::EDUCATION_LEVELS);
             $table->timestamps();
         });
     }

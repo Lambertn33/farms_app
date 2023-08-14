@@ -19,19 +19,13 @@ class SeasonsSeeder extends Seeder
         DB::table('seasons')->insert([
             [
                 'id' => Str::uuid()->toString(),
-                'season' => 'Spring',
+                'season' => 'A',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'id' => Str::uuid()->toString(),
-                'season' => 'Summer',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'id' => Str::uuid()->toString(),
-                'season' => 'Autumn',
+                'season' => 'B',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
