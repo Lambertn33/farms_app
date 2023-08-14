@@ -31,4 +31,14 @@ class AuthController extends Controller
     {
         return (new AuthServices)->logout();
     }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'old_password' => 'required',
+            'new_password' => 'required',
+        ]);
+        return (new AuthServices)->updatePassword($request);
+    }
 }

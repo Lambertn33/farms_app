@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use Validator;
+use Illuminate\Support\Facades\Hash;
 
 class AuthServices
 {
@@ -24,7 +26,7 @@ class AuthServices
     public function logout()
     {
         auth()->logout();
-        return response()->json(['message' => 'User successfully signed out']);
+        return response()->json(['message' => 'User successfully signed out'], 200);
     }
 
     protected function createNewToken($token)
@@ -33,5 +35,21 @@ class AuthServices
             'access_token' => $token,
 
         ]);
+    }
+    
+    public function updatePassword($data)
+    {
+        $user = User::where('email', $data->email)->first();
+        $checkPassowrd = Hash::check($data->old_password, $user->password);
+        if ($checkPassowrd) {
+            $newPassword = $data->new_password;
+            $user->update([
+                'password' => Hash::make($newPassword),
+                'has_confirmed_password' => true
+            ]);
+            return response()->json(['message' => 'Password changed successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Invalid old password provided'], 400);
+        }
     }
 }
