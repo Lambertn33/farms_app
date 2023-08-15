@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\SitesController as AdminSitesController;
 use App\Http\Controllers\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\Admin\FarmersController as AdminFarmersController;
+use App\Http\Controllers\Admin\YieldsController as AdminYieldsController;
 
 use App\Http\Controllers\SiteManager\FarmersController as ManagerFarmersController;
 use App\Http\Controllers\SiteManager\SitesController as ManagerSitesController;
@@ -51,6 +52,10 @@ Route::middleware('check.role:' . User::ADMIN . '')->prefix('admin')->group(func
     Route::controller(AdminFarmersController::class)->prefix('farmers')->group(function () {
         Route::get('/', 'index');
         Route::get('/{farmerId}', 'show');
+    });
+
+    Route::controller(AdminYieldsController::class)->prefix('yields')->group(function () {
+        Route::get('/', 'index');
     });
 });
 

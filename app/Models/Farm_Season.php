@@ -18,11 +18,11 @@ class Farm_Season extends Model
     const SOYA = self::PRODUCTS[2];
 
     protected $fillable = [
-        'farmer_id', 'season_id', 'year', 'yield', 'product'
+        'farm_id', 'season_id', 'year', 'yield', 'product'
     ];
 
     protected $casts = [
-        'farmer_id' => 'string',
+        'farm_id' => 'string',
         'season_id' => 'string'
     ];
 }
