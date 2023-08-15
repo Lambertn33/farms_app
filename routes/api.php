@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\YieldsController as AdminYieldsController;
 use App\Http\Controllers\SiteManager\FarmersController as ManagerFarmersController;
 use App\Http\Controllers\SiteManager\SitesController as ManagerSitesController;
 use App\Http\Controllers\SiteManager\FarmsController as ManagerFarmsController;
+use App\Http\Controllers\SiteManager\YieldsController as ManagerYieldsController;
 
 use App\Http\Controllers\Farmer\FarmsController as FarmerFarmsController;
 use App\Http\Controllers\Farmer\YieldsController as FarmerYieldsController;
@@ -77,6 +78,10 @@ Route::middleware('check.role:' . User::SITE_MANAGER . '')->prefix('manager')->g
                 });
             });
         });
+    });
+
+    Route::controller(ManagerYieldsController::class)->prefix('yields')->group(function () {
+        Route::get('/', 'index');
     });
 });
 //Farmer Routes
