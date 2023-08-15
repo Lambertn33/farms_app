@@ -56,7 +56,7 @@ class Farm extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function seasons(): BelongsToMany
+    public function yields(): BelongsToMany
     {
         return $this->belongsToMany(Season::class, 'farm__seasons', 'farmer_id', 'season_id')->withPivot('year', 'yield');
     }
