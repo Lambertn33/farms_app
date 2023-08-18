@@ -9,7 +9,7 @@ class YieldsServices
 {
     public function getSeasonsYields($request, $authenticatedManager)
     {
-        $seasonsYields = Season::with('yields.site.manager')
+        $seasonsYields = Season::with('yields.site.manager')->with('incomes')->with('expenses')
             ->when($request->query('season'), function ($query, $seasonId) {
                 return $query->whereHas('yields', function ($subQuery) use ($seasonId) {
                     $subQuery->where('season_id', $seasonId);

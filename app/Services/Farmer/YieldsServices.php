@@ -25,7 +25,8 @@ class YieldsServices
         $season = Season::find($request->season);
         $farm->yields()->attach($season, [
             'year' => $request->year,
-            'yield' => $request->yield,
+            'yield' => $request->yield ? $request->yield : 0,
+            'product' => $request->product,
             'created_at' => now(),
             'updated_at' => now()
         ]);

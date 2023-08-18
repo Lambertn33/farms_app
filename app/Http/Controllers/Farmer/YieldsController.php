@@ -17,7 +17,7 @@ class YieldsController extends Controller
         $request->validate([
             'season' => 'required|exists:seasons,id',
             'year' => 'required',
-            'yield' => 'required'
+            'product' => 'required'
         ]);
 
         return (new YieldsServices)->createFarmYield($farmId, $request);

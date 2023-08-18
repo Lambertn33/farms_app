@@ -9,7 +9,7 @@ class FarmsServices
 {
     public function getFarmDetails($farmId)
     {
-        $farm = Farm::with('farmer.user')->with('site')->find($farmId);
+        $farm = Farm::with('farmer.user')->with('yields')->with('site')->find($farmId);
         return response()->json($farm, 200);
     }
 
