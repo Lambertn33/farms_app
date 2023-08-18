@@ -12,4 +12,9 @@ class YieldsController extends Controller
     {
         return (new YieldsServices)->getSeasonsYields($request);
     }
+
+    public function show($yield)
+    {
+        return (new YieldsServices)->getYieldIncomesAndExpenses($yield);
+    }
 }

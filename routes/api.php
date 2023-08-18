@@ -59,6 +59,7 @@ Route::middleware('check.role:' . User::ADMIN . '')->prefix('admin')->group(func
 
     Route::controller(AdminYieldsController::class)->prefix('yields')->group(function () {
         Route::get('/', 'index');
+        Route::get('/{yield}', 'show');
     });
 });
 
@@ -84,8 +85,10 @@ Route::middleware('check.role:' . User::SITE_MANAGER . '')->prefix('manager')->g
 
     Route::controller(ManagerYieldsController::class)->prefix('yields')->group(function () {
         Route::get('/', 'index');
+        Route::get('/{yield}', 'show');
     });
 });
+
 //Farmer Routes
 Route::middleware('check.role:' . User::FARMER . '')->prefix('farmer')->group(function () {
     Route::prefix('farms')->group(function () {

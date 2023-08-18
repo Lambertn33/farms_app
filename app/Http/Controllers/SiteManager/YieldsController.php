@@ -11,11 +11,17 @@ class YieldsController extends Controller
 {
     private $authenticatedManager;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->authenticatedManager = Auth::user()->manager;
     }
     public function index(Request $request)
     {
         return (new YieldsServices)->getSeasonsYields($request, $this->authenticatedManager);
+    }
+
+    public function show($yield)
+    {
+        return (new YieldsServices)->getYieldIncomesAndExpenses($yield);
     }
 }

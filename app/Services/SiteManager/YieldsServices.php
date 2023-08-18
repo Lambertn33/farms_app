@@ -2,6 +2,7 @@
 
 namespace App\Services\SiteManager;
 
+use App\Models\Farm_Season;
 use App\Models\Season;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,7 @@ class YieldsServices
 {
     public function getSeasonsYields($request, $authenticatedManager)
     {
-        $seasonsYields = Season::with('yields.site.manager')->with('incomes')->with('expenses')
+        $seasonsYields = Season::with('yields.site.manager')
             ->when($request->query('season'), function ($query, $seasonId) {
                 return $query->whereHas('yields', function ($subQuery) use ($seasonId) {
                     $subQuery->where('season_id', $seasonId);
@@ -25,5 +26,10 @@ class YieldsServices
             })
             ->get();
         return response()->json($seasonsYields, 200);
+    }
+
+    public function getYieldIncomesAndExpenses($yield)
+    {
+        return Farm_Season::with('incomes')->with('expenses')->find($yield);
     }
 }

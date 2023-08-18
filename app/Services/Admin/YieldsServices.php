@@ -2,6 +2,7 @@
 
 namespace App\Services\Admin;
 
+use App\Models\Farm_Season;
 use App\Models\Season;
 use Illuminate\Http\Request;
 
@@ -17,5 +18,10 @@ class YieldsServices
             })
             ->get();
         return response()->json($seasonsYields, 200);
+    }
+
+    public function getYieldIncomesAndExpenses($yield)
+    {
+        return Farm_Season::with('incomes')->with('expenses')->find($yield);
     }
 }
