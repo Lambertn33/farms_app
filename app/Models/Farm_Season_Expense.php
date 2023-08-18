@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Season_Expense extends Model
+class Farm_Season_Expense extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'id', 'season_id', 'type', 'product', 'quantity', 'price', 'description',
+        'id', 'yield_id', 'type', 'product', 'quantity', 'price', 'description',
     ];
 
     protected $casts = [
         'id' => 'string',
-        'season_id' => 'string'
+        'yield_id' => 'string'
     ];
 
     const EXPENSES_TYPES = [
@@ -33,8 +33,9 @@ class Season_Expense extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function season(): BelongsTo
+    public function yield(): BelongsTo
     {
-        return $this->belongsTo(Season::class, 'season_id', 'id');
+        return $this->belongsTo(Farm_Season::class, 'yield_id', 'id');
     }
+    
 }

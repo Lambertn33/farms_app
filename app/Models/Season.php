@@ -26,26 +26,6 @@ class Season extends Model
      */
     public function yields(): BelongsToMany
     {
-        return $this->belongsToMany(Farm::class, 'farm__seasons', 'season_id', 'farm_id')->withPivot('year', 'yield');
-    }
-
-    /**
-     * Get all of the incomes for the Season
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function incomes(): HasMany
-    {
-        return $this->hasMany(Season_Income::class, 'season_id', 'id');
-    }
-
-    /**
-     * Get all of the expenses for the Season
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function expenses(): HasMany
-    {
-        return $this->hasMany(Season_Expense::class, 'season_id', 'id');
+        return $this->belongsToMany(Farm::class, 'farm__seasons', 'season_id', 'farm_id')->withPivot('year', 'yield', 'product');
     }
 }

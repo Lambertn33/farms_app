@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Season_Income;
+use App\Models\Farm_Season_Expense;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,10 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('season__incomes', function (Blueprint $table) {
+        Schema::create('farm__season__expenses', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('season_id');
-            $table->enum('type', Season_Income::INCOME_TYPES);
+            $table->enum('type', Farm_Season_Expense::EXPENSES_TYPES);
+            $table->string('product');
             $table->bigInteger('quantity');
             $table->bigInteger('price');
             $table->string('description');
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('season__incomes');
+        Schema::dropIfExists('farm__season__expenses');
     }
 };
