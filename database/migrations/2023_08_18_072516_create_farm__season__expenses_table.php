@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('farm__season__expenses', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('season_id');
+            $table->uuid('yield_id');
             $table->enum('type', Farm_Season_Expense::EXPENSES_TYPES);
             $table->string('product');
             $table->bigInteger('quantity');

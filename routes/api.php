@@ -15,6 +15,7 @@ use App\Http\Controllers\SiteManager\YieldsController as ManagerYieldsController
 
 use App\Http\Controllers\Farmer\FarmsController as FarmerFarmsController;
 use App\Http\Controllers\Farmer\YieldsController as FarmerYieldsController;
+use App\Http\Controllers\Farmer\IncomesController as FarmerIncomesController;
 
 use App\Models\User;
 
@@ -93,11 +94,17 @@ Route::middleware('check.role:' . User::FARMER . '')->prefix('farmer')->group(fu
             Route::post('/', 'store');
         });
         Route::prefix('{farmId}')->group(function () {
-            Route::controller(FarmerYieldsController::class)->group(function () {
-                Route::prefix('yields')->group(function () {
+            Route::prefix('yields')->group(function () {
+                Route::controller(FarmerYieldsController::class)->group(function () {
                     Route::get('/', 'show');
                     Route::get('/create', 'create');
                     Route::post('/', 'store');
+                    Route::prefix('{yieldId}')->group(function() {
+                        Route::controller(FarmerIncomesController::class)->prefix('incomes')->group(function() {
+                            Route::get('/', 'index');
+                            Route::post('/', 'store');
+                        });
+                    });
                 });
             });
         });

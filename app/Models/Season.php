@@ -26,6 +26,6 @@ class Season extends Model
      */
     public function yields(): BelongsToMany
     {
-        return $this->belongsToMany(Farm::class, 'farm__seasons', 'season_id', 'farm_id')->withPivot('year', 'yield', 'product');
+        return $this->belongsToMany(Farm::class, 'farm__seasons', 'season_id', 'farm_id')->withPivot('id', 'year', 'yield', 'product');
     }
 }

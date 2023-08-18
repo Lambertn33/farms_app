@@ -13,9 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('farm__seasons', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->uuid('farm_id');
             $table->uuid('season_id');
-            $table->bigInteger('yield');
+            $table->bigInteger('yield')->default(0);
             $table->bigInteger('year');
             $table->enum('product', Farm_Season::PRODUCTS);
             $table->timestamps();
