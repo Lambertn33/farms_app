@@ -9,7 +9,7 @@ class FarmersController extends Controller
 {
     public function index()
     {
-        $farmers = Farmer::with('user')->get();
+        $farmers = Farmer::with('user')->with('farms')->get();
         return response()->json($farmers, 200);
     }
 

@@ -24,6 +24,7 @@ class YieldsServices
         $farm = Farm::find($farmId);
         $season = Season::find($request->season);
         $farm->yields()->attach($season, [
+            'id' => Str::uuid()->toString(),
             'year' => $request->year,
             'yield' => $request->yield ? $request->yield : 0,
             'product' => $request->product,

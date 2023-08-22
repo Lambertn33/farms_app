@@ -20,7 +20,7 @@ class Farmer extends Model
         'FEMALE'
     ];
 
-    const EDUCATION_LEVELS = ['PRIMARY', 'HiGH SCHOOL', 'UNIVERSITY', 'TVET'];
+    const EDUCATION_LEVELS = ['PRIMARY', 'HIGH SCHOOL', 'UNIVERSITY', 'TVET'];
 
     protected $fillable = [
         'id', 'user_id', 'DOB', 'gender', 'family_members', 'marital_status', 'education_level'
