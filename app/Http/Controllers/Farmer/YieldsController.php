@@ -26,4 +26,9 @@ class YieldsController extends Controller
     {
         return (new YieldsServices)->getFarmYields($id);
     }
+
+    public function update(Request $request, $farmId)
+    {
+        return (new YieldsServices)->updateFarmYield($farmId, $request);
+    }
 }

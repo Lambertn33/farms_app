@@ -13,7 +13,7 @@ class MessagesServices
             'Authorization' => 'Bearer ' . env("SMS_TOKEN") . '',
         ])->acceptJson()
             ->post('' . env("SMS_URL") . '', [
-                'sender' => 'FARMERS',
+                'sender' => 'Lambertn33',
                 'to' => '+' . $telephone,
                 'text' => $message
             ]);

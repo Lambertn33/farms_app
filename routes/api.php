@@ -103,6 +103,7 @@ Route::middleware('check.role:' . User::FARMER . '')->prefix('farmer')->group(fu
                     Route::get('/', 'show');
                     Route::get('/create', 'create');
                     Route::post('/', 'store');
+                    Route::put("/", 'update');
                     Route::prefix('{yieldId}')->group(function () {
                         Route::controller(FarmerIncomesController::class)->prefix('incomes')->group(function () {
                             Route::get('/', 'index');

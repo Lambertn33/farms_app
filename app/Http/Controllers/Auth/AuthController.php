@@ -22,6 +22,11 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+    public function index()
+    {
+        return (null);
+    }
+
     public function login(Request $request)
     {
         return (new AuthServices)->login($request);
