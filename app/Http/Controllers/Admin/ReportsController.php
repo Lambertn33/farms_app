@@ -14,10 +14,14 @@ class ReportsController extends Controller
         $productsdata = [];
         $groupedData = [];
         $farmsData = [];
+        $sitesData = [];
 
         $allSites = Site::with('farms')->get();
+
         foreach ($allSites as $site) {
             $farms = $site->farms()->where('status', "ACCEPTED")->get();
+
+            $siteTotalIncomes = 0;
 
             foreach ($farms as $farm) {
                 foreach ($farm->yields as $yield) {
@@ -50,12 +54,22 @@ class ReportsController extends Controller
                     }
                 }
 
+                // Add the farm's total income to the site's total income
+                $siteTotalIncomes += $totalIncomes;
+
                 $farmsData[] = [
                     'farm' => $farm->name,
+                    'site' => $farm->site->name,
                     'totalIncomes' => $totalIncomes,
                     'totalExpenses' => $totalExpenses,
                 ];
             }
+
+            // Add the site's data to the sitesData array
+            $sitesData[] = [
+                'site' => $site->name,
+                'totalIncomes' => $siteTotalIncomes,
+            ];
 
             foreach ($groupedData as $product => $totalYield) {
                 $productsdata[] = [
@@ -63,17 +77,21 @@ class ReportsController extends Controller
                     'yield' => $totalYield
                 ];
             }
-
-            // return $type === "products_reports" ? $productsdata : $farmsData;
-            if ($type === "products_report") {
-                return response()->json($productsdata, 200);
-            }
-
-            if ($type === "incomes_expenses_report") {
-                return response()->json($farmsData, 200);
-            }
-
-            return response()->json(['message' => 'invalid type'], 400);
         }
+
+        // Determine the type of report to return
+        if ($type === "products_report") {
+            return response()->json($productsdata, 200);
+        }
+
+        if ($type === "incomes_expenses_report") {
+            return response()->json($farmsData, 200);
+        }
+
+        if ($type === "sites_report") {
+            return response()->json($sitesData, 200);
+        }
+
+        return response()->json(['message' => 'Invalid type'], 400);
     }
 }
