@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SitesController as AdminSitesController;
 use App\Http\Controllers\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\Admin\FarmersController as AdminFarmersController;
 use App\Http\Controllers\Admin\YieldsController as AdminYieldsController;
+use App\Http\Controllers\Admin\ReportsController as AdminReportsController;
 
 use App\Http\Controllers\SiteManager\FarmersController as ManagerFarmersController;
 use App\Http\Controllers\SiteManager\SitesController as ManagerSitesController;
@@ -43,6 +44,10 @@ Route::controller(AuthController::class)
 
 //Administrator Routes
 Route::middleware('check.role:' . User::ADMIN . '')->prefix('admin')->group(function () {
+    Route::prefix('reports')->controller(AdminReportsController::class)->group(function () {
+        // type is either incomes_expenses_report or products_report
+        Route::get('/{type}', 'index');
+    });
     Route::controller(AdminUsersController::class)->prefix('users')->group(function () {
         Route::get('/', 'index');
         Route::post('/', 'store');
