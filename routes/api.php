@@ -17,7 +17,8 @@ use App\Http\Controllers\Farmer\FarmsController as FarmerFarmsController;
 use App\Http\Controllers\Farmer\YieldsController as FarmerYieldsController;
 use App\Http\Controllers\Farmer\IncomesController as FarmerIncomesController;
 use App\Http\Controllers\Farmer\ExpensesController as FarmerExpensesController;
-
+use App\Http\Controllers\Farmer\ReportsController as FarmerReportsController;
+use App\Models\Farmer;
 use App\Models\User;
 
 /*
@@ -91,6 +92,10 @@ Route::middleware('check.role:' . User::SITE_MANAGER . '')->prefix('manager')->g
 
 //Farmer Routes
 Route::middleware('check.role:' . User::FARMER . '')->prefix('farmer')->group(function () {
+    Route::prefix('reports')->controller(FarmerReportsController::class)->group(function () {
+        // type is either incomes_expenses_report or products_report
+        Route::get('/{type}', 'index');
+    });
     Route::prefix('farms')->group(function () {
         Route::controller(FarmerFarmsController::class)->group(function () {
             Route::get('/', 'index');
