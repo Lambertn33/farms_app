@@ -12,13 +12,13 @@ use App\Http\Controllers\SiteManager\FarmersController as ManagerFarmersControll
 use App\Http\Controllers\SiteManager\SitesController as ManagerSitesController;
 use App\Http\Controllers\SiteManager\FarmsController as ManagerFarmsController;
 use App\Http\Controllers\SiteManager\YieldsController as ManagerYieldsController;
+use App\Http\Controllers\SiteManager\ReportsController as ManagerReportsController;
 
 use App\Http\Controllers\Farmer\FarmsController as FarmerFarmsController;
 use App\Http\Controllers\Farmer\YieldsController as FarmerYieldsController;
 use App\Http\Controllers\Farmer\IncomesController as FarmerIncomesController;
 use App\Http\Controllers\Farmer\ExpensesController as FarmerExpensesController;
 use App\Http\Controllers\Farmer\ReportsController as FarmerReportsController;
-use App\Models\Farmer;
 use App\Models\User;
 
 /*
@@ -66,6 +66,10 @@ Route::middleware('check.role:' . User::ADMIN . '')->prefix('admin')->group(func
 
 //Site Manager Routes
 Route::middleware('check.role:' . User::SITE_MANAGER . '')->prefix('manager')->group(function () {
+    Route::prefix('reports')->controller(ManagerReportsController::class)->group(function () {
+        // type is either incomes_expenses_report or products_report
+        Route::get('/{type}', 'index');
+    });
     Route::controller(ManagerFarmersController::class)->prefix('farmers')->group(function () {
         Route::post('/', 'store');
     });
