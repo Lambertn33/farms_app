@@ -45,7 +45,7 @@ Route::controller(AuthController::class)
 //Administrator Routes
 Route::middleware('check.role:' . User::ADMIN . '')->prefix('admin')->group(function () {
     Route::prefix('reports')->controller(AdminReportsController::class)->group(function () {
-        // type is either incomes_expenses_report or products_report
+        // type is either incomes_expenses_report or products_report or sites_report
         Route::get('/{type}', 'index');
     });
     Route::controller(AdminUsersController::class)->prefix('users')->group(function () {
