@@ -20,8 +20,12 @@ class FarmsController extends Controller
     public function index()
     {
         $authenticatedFarmer = $this->authenticatedFarmer;
-        $farms = (new FarmsServices)->getMyFarms($authenticatedFarmer);
-        return response()->json($farms, 200);
+        list($userFarms, $userTotalSize) = (new FarmsServices)->getMyFarms($authenticatedFarmer);
+
+        return response()->json([
+            'farms' => $userFarms,
+            'total_size' => $userTotalSize,
+        ], 200);
     }
 
     public function create()

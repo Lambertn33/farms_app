@@ -10,7 +10,10 @@ class FarmsServices
 
     public function getMyFarms($user)
     {
-        return $user->farms()->get();
+        // return $user->farms()->get();
+        $userFarms = $user->farms()->get();
+        $userTotalSize = $user->farms()->sum('size');
+        return [$userFarms, $userTotalSize];
     }
 
     public function createNewFarm($farmObject, $farmerId)
