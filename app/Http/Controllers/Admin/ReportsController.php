@@ -28,12 +28,13 @@ class ReportsController extends Controller
                     $product = $yield->pivot->product;
                     $yieldAmount = $yield->pivot->yield;
 
+                    // Accumulate yield amounts by product name across all farms
                     if (!isset($groupedData[$product])) {
                         $groupedData[$product] = 0;
                     }
-
                     $groupedData[$product] += $yieldAmount;
                 }
+
 
                 $yieldIncomes = Farm_Season::with('incomes', 'expenses')
                     ->where('farm_id', $farm->id)
@@ -70,14 +71,15 @@ class ReportsController extends Controller
                 'site' => $site->name,
                 'totalIncomes' => $siteTotalIncomes,
             ];
-
-            foreach ($groupedData as $product => $totalYield) {
-                $productsdata[] = [
-                    'product' => $product,
-                    'yield' => $totalYield
-                ];
-            }
+            // Process grouped data to create the final productsdata array
         }
+        foreach ($groupedData as $product => $totalYield) {
+            $productsdata[] = [
+                'product' => $product,
+                'yield' => $totalYield
+            ];
+        }
+
 
         // Determine the type of report to return
         if ($type === "products_report") {
